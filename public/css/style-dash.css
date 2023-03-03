@@ -1,0 +1,75 @@
+html, body{
+    height: 100%;
+}
+.navbar{
+    display: flex;
+    justify-content: space-between;
+    background-color: #8AA6A3;
+}
+.navbar p{
+    color: #FFF;
+}
+.navbar button{
+    min-width: 100px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+footer{
+    bottom: 0;
+    position: absolute;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+    background-color: #8aa6a3;
+}
+footer p{
+    width: 100%;
+    margin-bottom: 0;
+    color: #F9F9F9;
+    font-weight: 700;
+}
+
+.container{
+    /* height: calc(100vh - 96px); */
+}
+
+.container .opcoes-header{
+    display: flex;
+    flex-basis: 19%;
+    justify-content: space-between;
+}
+
+.container .opcoes-header button{
+    display: flex;
+    justify-content: space-around;
+    border-radius: 5px !important;
+}
+
+.content-admin .cards-pacientes{}
+
+.content-admin .cards-pacientes .card-pacientes h5{}
+
+.content-admin .cards-pacientes .card-pacientes p{
+    font-size: 35px;
+}
+.content-agendamentos{
+    display: flex;
+    justify-content: space-between;
+}
+.content-agendamentos .box-listagem{
+    flex-basis: 66%;
+    /* background-color: red; */
+    height: 590px;
+    overflow: auto;
+}
+.content-agendamentos .box-calendario{
+    flex-basis: 31.5%;
+}
+.content-agendamentos .box-calendario .ui-datepicker{
+    width: 100%;
+}
