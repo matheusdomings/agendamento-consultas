@@ -1,7 +1,7 @@
 html, body {
     height: 100%;
     font-family: 'Nunito', sans-serif;
-    background-color: #8AA6A3;
+    background-color: #447cb9;
 }
 .container{
     display: flex;
@@ -22,20 +22,20 @@ html, body {
     width: 65px;
 }
 .box-login .form-control:focus{
-    border-color: #8aa6a3;
+    border-color: #447cb9;
     box-shadow: 0 0 0 1px rgb(138 166 163);
 }
 .box-login .form-group .input-label{
     font-weight: 700;
-    color: #8aa6a3;
+    color: #447cb9;
 }
 .box-login button{
     display: flex;
     justify-content: space-between;
     align-items: center;
     color: #FFF;
-    background-color: #8AA6A3;
-    border-color: #8AA6A3;
+    background-color: #447cb9;
+    border-color: #447cb9;
 }
 .box-login button:hover{
     background-color: #638783;

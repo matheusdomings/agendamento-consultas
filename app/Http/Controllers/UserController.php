@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
+use App\Models\User;
 
 class UserController extends Controller
 {
@@ -56,6 +57,17 @@ class UserController extends Controller
 
         return $dataReturn;
 
+    }
+
+    // Marca as notificações como lidas
+    public function markAsReadNotification(){
+        // $dataReturn = ['message' => false, 'redirect' => false];
+        $user = User::findOrFail(Auth::user()->id);
+        // Marca as notificações não lidas como lidas
+        $user->unreadNotifications()->update(['read_at' => now()]);
+        // Retorno
+        $dataReturn['message'] = 'Notificações lidas com sucesso!';
+        return response()->json($dataReturn);
     }
 
 }

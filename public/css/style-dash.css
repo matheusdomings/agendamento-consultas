@@ -1,10 +1,11 @@
 html, body{
     height: 100%;
+    font-family: 'Nunito', sans-serif;
 }
 .navbar{
     display: flex;
     justify-content: space-between;
-    background-color: #8AA6A3;
+    background-color: #447cb9;
 }
 .navbar p{
     color: #FFF;
@@ -17,16 +18,15 @@ html, body{
 }
 
 footer{
+    background-color: #447cb9;
+    position: fixed;
+    left: 0;
     bottom: 0;
-    position: absolute;
     width: 100%;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    align-items: center;
+    color: white;
     text-align: center;
-    background-color: #8aa6a3;
 }
+
 footer p{
     width: 100%;
     margin-bottom: 0;
@@ -38,10 +38,45 @@ footer p{
     /* height: calc(100vh - 96px); */
 }
 
+.container .titulo-header img{
+    /* filter: invert(1); */
+}
+
 .container .opcoes-header{
     display: flex;
     flex-basis: 19%;
     justify-content: space-between;
+}
+.container .opcoes-header .dropdown-menu{
+    margin-left: -90px;
+}
+
+.container .opcoes-header .dropdown-notificacoes{
+    display: flex;
+    flex-direction: column;
+}
+
+.container .opcoes-header .notificacoes-titulo{
+    background-color: #1c4878;
+    justify-content: center;
+    display: flex;
+    padding: 5px;
+    color: #FFFFFF;
+    text-transform: uppercase;
+}
+.container .opcoes-header .notificacoes-titulo p{
+    font-size: 15px;
+}
+
+.container .opcoes-header .dropdown-notificacoes .dropdown-item{
+    /* cursor: pointer; */
+}
+
+.container .opcoes-header .btn-marcar-notificacoes{
+    border-radius: 0 !important;
+    font-size: 12px;
+    background-color: #447cb9;
+    color: #FFFFFF;
 }
 
 .container .opcoes-header button{
@@ -52,10 +87,22 @@ footer p{
 
 .content-admin .cards-pacientes{}
 
+.content-admin .cards-pacientes .card,
+.content-admin .card-tabela-agendamentos{
+    border: none;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+
+.content-admin .cards-pacientes .card-header{
+    background-color: #447cb9;
+    color: #FFFFFF;
+}
+
 .content-admin .cards-pacientes .card-pacientes h5{}
 
 .content-admin .cards-pacientes .card-pacientes p{
     font-size: 35px;
+    color: #447cb9;
 }
 .content-agendamentos{
     display: flex;

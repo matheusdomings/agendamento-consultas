@@ -4,92 +4,60 @@
 <div class="content-admin">
 
     <div class="row mt-4 cards-pacientes">
-        <div class="col-4 card-pacientes">
+        <div class="col-12 col-md-4 card-pacientes">
             <div class="card text-white bg-light mb-3">
-                <div class="card-header text-dark">Pacientes Agendados</div>
-                <div class="card-body text-dark">
+                <div class="card-header">Pacientes Agendados</div>
+                <div class="card-body bg-light text-dark">
                     <h5 class="card-title">Total</h5>
-                    <p class="card-text">22</p>
+                    <p class="card-text">{{ count($schedules['all']) }}</p>
                 </div>
             </div>
         </div>
-        <div class="col-4 card-pacientes">
+        <div class="col-12 col-md-4 card-pacientes">
             <div class="card text-white bg-light mb-3">
-                <div class="card-header text-dark">Pacientes Agendados</div>
-                <div class="card-body text-dark">
+                <div class="card-header">Pacientes Agendados</div>
+                <div class="card-body bg-light text-dark">
                     <h5 class="card-title">Hoje</h5>
-                    <p class="card-text">22</p>
+                    <p class="card-text">{{ count($schedules['today']) }}</p>
                 </div>
             </div>
         </div>
-        <div class="col-4 card-pacientes">
-            <div class="card text-white bg-light mb-3">
-                <div class="card-header text-dark">Pacientes Agendados</div>
-                <div class="card-body text-dark">
-                    <h5 class="card-title">Esta semana</h5>
-                    <p class="card-text">12</p>
+        <div class="col-12 col-md-4 card-pacientes">
+            <div class="card text-white mb-3">
+                <div class="card-header">Pacientes Agendados</div>
+                <div class="card-body bg-light text-dark">
+                    <h5 class="card-title">Próximos 7 dias</h5>
+                    <p class="card-text">{{ count($schedules['next_days']) }}</p>
                 </div>
             </div>
         </div>
     </div>
-
     
-    <table class="table table-hover" id="teste">
-        <thead>
-            <tr>
-            <th scope="col">#</th>
-            <th scope="col">Horário</th>
-            <th scope="col">Paciente</th>
-            <th scope="col" style="max-width: 60px;">Opções</th>
-            </tr>
-        </thead>
-        <tbody>
-            @for($i = 0; $i < 5; $i++)
-            <tr>
-                <th scope="row">1</th>
-                <td>08:00</td>
-                <td>Matheus Henrique Domingos da Silva</td>
-                <td>
-                    <div class="btn-group">
-                        <div class="btn-group" role="group">
-                            <button type="button" class="btn btn-secondary"><i class="fa-solid fa-eye"></i></button>
-                        </div>
-                    </div>
-                </td>
-            </tr>
-            @endfor
-        </tbody>
-    </table>
-    
-    @if(1 == 2)
-    <div class="content-agendamentos">
-        <div class="box-listagem">
-            <table class="table table-hover">
-                <thead>
-                    <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Horário</th>
+    <div class="card card-tabela-agendamentos p-3 bg-light">
+        <table class="table table-hover" id="tabela-agendamentos">
+            <thead>
+                <tr>
+                    <th scope="col">Data</th>
                     <th scope="col">Paciente</th>
-                    <th scope="col">Opções</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @for($i = 0; $i < 5; $i++)
-                    <tr>
-                        <th scope="row">1</th>
-                        <td>08:00</td>
-                        <td>Otto</td>
-                        <td>Otto</td>
-                    </tr>
-                    @endfor
-                </tbody>
-            </table>
-        </div>
-        <div class="box-calendario" id="calendario"></div>
+                    <th scope="col" style="max-width: 60px;">Opções</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if(count($schedules['all']) > 0)
+                @foreach($schedules['all'] as $key => $schedule)
+                <tr id="consulta_{{ $schedule->id }}">
+                    <td>{{ date('d/m/Y H:i', strtotime($schedule->date_consult)) }}</td>
+                    <td>{{ Helper::getNameById($schedule->patient_id) }}</td>
+                    <td>
+                        <button type="button" class="btn btn-sm btn-danger js_cancelar_agendamento_admin" data-id="{{$schedule->id}}"><i class="fa-solid fa-ban"></i></button>
+                    </td>
+                </tr>
+                @endforeach
+                @endif
+            </tbody>
+        </table>
     </div>
-    @endif
-    
-
-</div>
+        
+    </div>
 
 @endsection

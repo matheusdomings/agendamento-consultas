@@ -16,7 +16,10 @@
     <body>
         <div class="container">
             <div class="box-login">
-                <img src="https://cdn-icons-png.flaticon.com/512/2994/2994480.png" alt="Icone de Login">
+                <div class="d-flex flex-column">
+                    <!-- <p>3Wings</p> -->
+                    <img src="{{ asset('/images/clinic.png') }}" alt="Icone de Login">
+                </div>
                 <form class="mt-4" action="/login" name="Login">
                     @csrf
                     <div class="form-group">

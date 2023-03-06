@@ -8,6 +8,7 @@ use App\Notifications\ScheduleNotification;
 use Illuminate\Support\Facades\Notification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class SchedulesController extends Controller
 {
@@ -31,6 +32,11 @@ class SchedulesController extends Controller
         // Define o agendamento
         $schedule = new Schedules();
         $dataReturn = ['success' => false, 'message' => false];
+
+        if($request->date_consult < date('Y-m-d')){
+            $dataReturn['message'] = 'Não é possível agendar para os dias anteriores!';
+            return $dataReturn;
+        }
 
         // Preenche os dados do agendamento
         $schedule->patient_id = Auth::user()->id;
@@ -93,7 +99,40 @@ class SchedulesController extends Controller
      */
     public function update(Request $request, Schedules $schedules)
     {
-        //
+        $dataReturn = ['success' => false, 'message' => false];
+        
+        // Busca os dados do agendamento
+        $schedule = DB::table('schedules')->where('id', $request->id)->first();
+        
+        // Atualiza o status do agendamento
+        $scheduleUpdate = DB::table('schedules')->where('id', $request->id)->update(['status' => 0]);
+        if(!empty($scheduleUpdate)){
+            // Envia a notificação para o usuário que a consulta foi cancelada e a mensagem
+            Notification::send(User::findOrFail($schedule->patient_id), new ScheduleNotification($request->message, $schedule));
+            $dataReturn['success'] = true;
+            $dataReturn['message'] = 'Consulta cancelada com sucesso!';
+        }
+
+        return response()->json($dataReturn);
+    }
+
+    public function updateByPatient(Request $request)
+    {
+        $dataReturn = ['success' => false, 'message' => false];
+        
+        // Busca os dados do agendamento
+        $schedule = DB::table('schedules')->where('id', $request->id)->first();
+        
+        // Atualiza o status do agendamento
+        $scheduleUpdate = DB::table('schedules')->where('id', $request->id)->update(['status' => 0]);
+        if(!empty($scheduleUpdate)){
+            // Envia a notificação para o usuário que a consulta foi cancelada e a mensagem
+            Notification::send(User::findOrFail($schedule->doctor_id), new ScheduleNotification('Uma consulta foi cancelada!', $schedule));
+            $dataReturn['success'] = true;
+            $dataReturn['message'] = 'Consulta cancelada com sucesso!';
+        }
+
+        return response()->json($dataReturn);
     }
 
     /**
@@ -103,7 +142,5 @@ class SchedulesController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy(Schedules $schedules)
-    {
-        //
-    }
+    {}
 }

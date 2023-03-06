@@ -11,8 +11,7 @@
                 <div class="form-group">
                     <label for="MEDICO" class="col-form-label">Médico</label>
                     <select class="form-control" id="MEDICO" name="doctor_id">
-                        <option value="1">José Jackson</option>
-                        <option value="2">Zedão kun ya</option>
+                        {{ $doctors }}
                     </select>
                 </div>
                 <!-- <div class="border-top"></div> -->
@@ -23,11 +22,11 @@
                     </div>
                     <div class="form-group col-6">
                         <label for="HORACONSULTA" class="col-form-label">Hora da Consulta</label>
-                        <!-- <input type="time" step="3600000" /> -->
+                        <!-- <input type="time" class="form-control" id="HORACONSULTA" name="hour_consult"/> -->
                         <select class="form-control" id="HORACONSULTA" name="hour_consult">
-                            <option>08:00</option>
-                            <option disabled>09:00</option>
-                            <option>10:00</option>
+                            @for($i = 7; $i < 19; $i++)
+                            <option>{{ (($i < 10)? '0'.$i: $i) }}:00</option>
+                            @endfor
                         </select>
                     </div>
                 </div>
